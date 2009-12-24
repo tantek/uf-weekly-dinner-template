@@ -18,7 +18,7 @@
     }
     
     // Format start and end dates
-    date_default_timezone_set('America/Los_Angeles');
+    date_default_timezone_set('America/Los_Angeles'); // TBI use event timezone
     $start_date = date('Y-m-d', strtotime($event->hcalendar->dtstart));
     $start_time = date('H:i', strtotime($event->hcalendar->dtstart));
     $end_time = $event->hcalendar->dtend ? date('H:i', strtotime($event->hcalendar->dtend)) : null;
@@ -38,6 +38,8 @@
     $region = $adr->region == 'California' ? 'CA' : htmlspecialchars($adr->region);
     $postal_code = htmlspecialchars($adr->{'postal-code'});
     $country_name = $adr->country_name ? htmlspecialchars($adr->country_name) : 'USA';
+    
+    // TBI: use event summary from the hCalendar event instead of hard-coding it
     
     header('Content-type: text/plain');
 ?>
